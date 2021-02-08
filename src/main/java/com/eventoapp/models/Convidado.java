@@ -3,12 +3,16 @@ package com.eventoapp.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+
 
 @Entity
 public class Convidado {
 
 	@Id
+	@NotBlank
 	private String rg;
+	@NotBlank
 	private String nomeConvidado;
 
 	@ManyToOne
@@ -37,5 +41,7 @@ public class Convidado {
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
+
+
 
 }
