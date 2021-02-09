@@ -83,4 +83,26 @@ public class EventoController {
 		
 		return null;
 	}
+	
+	@RequestMapping("/deletarEvento")
+	public String deletarEvento(Long id) {
+		Optional<Evento> evento = repository.findById(id);
+		if (evento.isPresent()) {
+			repository.delete(evento.get());
+			return "redirect:/eventos";
+		}
+		return "redirect:/eventos";
+	}
+	
+	@RequestMapping("/deletarConvidado")
+	public String deletarConvidado(String rg) {
+		Convidado convidado = convidadoRepository.findByRg(rg);
+		convidadoRepository.delete(convidado);
+		
+		Evento evento = convidado.getEvento();
+		Long idLong = evento.getId();
+		String id = "" + idLong;
+		return "redirect:/" + id;
+		
+	}
 }
